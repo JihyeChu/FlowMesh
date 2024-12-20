@@ -1,0 +1,33 @@
+server:
+  port: 19045
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        default_batch_fetch_size: 500
+  config:
+    import: classpath:application-key.yml
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19040/eureka/
+
+service:
+  jwt:
+    secret-key: ${SECRET-KEY}
+    access-expiration: 600000 # 10분
+    refresh-expiration: 10800000 # 3시간
